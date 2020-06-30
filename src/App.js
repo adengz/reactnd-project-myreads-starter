@@ -1,5 +1,6 @@
 import React from 'react';
 import Book from './components/Book';
+import BookShelf from './components/BookShelf';
 // import * as BooksAPI from './BooksAPI'
 import './App.css';
 
@@ -100,36 +101,9 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Currently Reading</h2>
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
-                      {this.state.currentlyReading.map((book) => (
-                        <Book imageLink={book.imageLink} title={book.title} authors={book.authors}/>
-                      ))}
-                    </ol>
-                  </div>
-                </div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Want to Read</h2>
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
-                      {this.state.wantToRead.map((book) => (
-                        <Book imageLink={book.imageLink} title={book.title} authors={book.authors}/>
-                      ))}
-                    </ol>
-                  </div>
-                </div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Read</h2>
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
-                      {this.state.read.map((book) => (
-                        <Book imageLink={book.imageLink} title={book.title} authors={book.authors}/>
-                      ))}
-                    </ol>
-                  </div>
-                </div>
+                <BookShelf title="Currently Reading" books={this.state.currentlyReading}/>
+                <BookShelf title="Want to Read" books={this.state.wantToRead}/>
+                <BookShelf title="Read" books={this.state.read}/>
               </div>
             </div>
             <div className="open-search">
