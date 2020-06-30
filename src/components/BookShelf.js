@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Book from './Book';
 
 function BookShelf(props) {
@@ -10,7 +10,7 @@ function BookShelf(props) {
       <div className="bookshelf-books">
         <ol className="books-grid">
           {books.map((book) => (
-            <li>
+            <li key={book.id}>
               <Book imageLink={book.imageLink} title={book.title} authors={book.authors}/>
             </li>
           ))}
