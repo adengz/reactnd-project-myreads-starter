@@ -22,7 +22,7 @@ class BooksApp extends React.Component {
     updatedBooks[idx].shelf = newShelf;
     BooksAPI.update(book, newShelf).then(() => {
       this.setState({allBooks: updatedBooks});
-    })
+    });
   }
 
   componentDidMount() {
@@ -50,8 +50,8 @@ class BooksApp extends React.Component {
           />
         )}
       </div>
-    )
+    );
   }
 }
 
-export default BooksApp
+export default BooksApp;
