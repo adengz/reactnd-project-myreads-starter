@@ -20,7 +20,9 @@ class BooksApp extends React.Component {
     const idx = this.state.allBooks.findIndex(b => b.id === book.id);
     const updatedBooks = [...this.state.allBooks];
     updatedBooks[idx].shelf = newShelf;
-    this.setState({allBooks: updatedBooks});
+    BooksAPI.update(book, newShelf).then(() => {
+      this.setState({allBooks: updatedBooks});
+    })
   }
 
   componentDidMount() {
