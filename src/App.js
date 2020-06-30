@@ -80,6 +80,13 @@ class BooksApp extends React.Component {
     showSearchPage: false
   }
 
+  changeShelf = (book, newShelf) => {
+    const idx = this.state.allBooks.findIndex(b => b.id === book.id);
+    const updatedBooks = [...this.state.allBooks];
+    updatedBooks[idx].shelf = newShelf;
+    this.setState({allBooks: updatedBooks});
+  }
+
   render() {
     const currentlyReading = this.state.allBooks.filter(book => book.shelf === 'currentlyReading');
     const wantToRead = this.state.allBooks.filter(book => book.shelf === 'wantToRead');
@@ -94,6 +101,7 @@ class BooksApp extends React.Component {
             currentlyReading={currentlyReading}
             wantToRead={wantToRead}
             read={read}
+            changeShelf={this.changeShelf}
             toSearchPage={() => this.setState({showSearchPage: true})}
           />
         )}

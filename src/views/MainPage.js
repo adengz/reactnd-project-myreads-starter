@@ -2,7 +2,7 @@ import React from 'react';
 import BookShelf from '../components/BookShelf';
 
 function MainPage(props) {
-  const {currentlyReading, wantToRead, read, toSearchPage } = props;
+  const {currentlyReading, wantToRead, read, changeShelf, toSearchPage } = props;
 
   return (
     <div className="list-books">
@@ -11,9 +11,9 @@ function MainPage(props) {
       </div>
       <div className="list-books-content">
         <div>
-          <BookShelf title="Currently Reading" books={currentlyReading}/>
-          <BookShelf title="Want to Read" books={wantToRead}/>
-          <BookShelf title="Read" books={read}/>
+          <BookShelf title="Currently Reading" books={currentlyReading} changeShelf={changeShelf}/>
+          <BookShelf title="Want to Read" books={wantToRead} changeShelf={changeShelf}/>
+          <BookShelf title="Read" books={read} changeShelf={changeShelf}/>
         </div>
       </div>
       <div className="open-search">
