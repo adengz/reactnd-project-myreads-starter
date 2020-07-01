@@ -35,7 +35,7 @@ class SearchPage extends React.Component {
           <Link className="close-search" to="/">Close</Link>
           <div className="search-books-input-wrapper">
             <form onSubmit={this.searchHandler}>
-              <input type="text" name="query" placeholder="Search by title or author"/>
+              <input type="text" name="query" placeholder="Search by title or author, press enter/return to view results"/>
             </form>
           </div>
         </div>
