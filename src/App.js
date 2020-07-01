@@ -39,7 +39,10 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         {this.state.showSearchPage ? (
-          <SearchPage toMainPage={() => this.setState({showSearchPage: false})}/>
+          <SearchPage
+            changeShelf={this.changeShelf}
+            toMainPage={() => this.setState({showSearchPage: false})}
+          />
         ) : (
           <MainPage
             currentlyReading={currentlyReading}

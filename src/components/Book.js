@@ -15,11 +15,11 @@ function Book(props) {
           style={{
             width: 128,
             height: 193,
-            backgroundImage: `url(${bookObj.imageLinks.thumbnail})`
+            backgroundImage: `url(${bookObj.imageLinks && bookObj.imageLinks.thumbnail})`
           }}
         ></div>
         <div className="book-shelf-changer">
-          <select value={bookObj.shelf} onChange={shelfChangeHandler}>
+          <select value={bookObj.shelf? bookObj.shelf:'none'} onChange={shelfChangeHandler}>
             <option value="move" disabled>Move to...</option>
             <option value="currentlyReading">Currently Reading</option>
             <option value="wantToRead">Want to Read</option>
@@ -29,7 +29,7 @@ function Book(props) {
         </div>
       </div>
       <div className="book-title">{bookObj.title}</div>
-      <div className="book-authors">{bookObj.authors.join(', ')}</div>
+      <div className="book-authors">{bookObj.authors && bookObj.authors[0]}</div>
     </div>
   );
 }
