@@ -2,7 +2,10 @@ import React from 'react';
 import BookShelf from '../components/BookShelf';
 
 function MainPage(props) {
-  const {currentlyReading, wantToRead, read, changeShelf, toSearchPage } = props;
+  const { myBooks, changeShelf, toSearchPage } = props;
+  const currentlyReading = myBooks.filter(book => book.shelf === 'currentlyReading');
+  const wantToRead = myBooks.filter(book => book.shelf === 'wantToRead');
+  const read = myBooks.filter(book => book.shelf === 'read');
 
   return (
     <div className="list-books">

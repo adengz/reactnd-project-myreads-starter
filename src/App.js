@@ -12,42 +12,44 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    allBooks: [],
+    myBooks: [],
     showSearchPage: false
   }
 
   changeShelf = (book, newShelf) => {
-    const idx = this.state.allBooks.findIndex(b => b.id === book.id);
-    const updatedBooks = [...this.state.allBooks];
-    updatedBooks[idx].shelf = newShelf;
+    const idx = this.state.myBooks.findIndex(b => b.id === book.id);
+    let myBooksUpdated = [...this.state.myBooks];
+    if (idx === -1) {
+      book.shelf = newShelf;
+      myBooksUpdated.push(book);
+    } else if (newShelf === 'none') {
+      myBooksUpdated = myBooksUpdated.filter(b => b.id !== book.id);
+    } else {
+      myBooksUpdated[idx].shelf = newShelf;
+    }
     BooksAPI.update(book, newShelf).then(() => {
-      this.setState({allBooks: updatedBooks});
+      this.setState({myBooks: myBooksUpdated});
     });
   }
 
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
-      this.setState({allBooks: books});
+      this.setState({myBooks: books});
     });
   }
 
   render() {
-    const currentlyReading = this.state.allBooks.filter(book => book.shelf === 'currentlyReading');
-    const wantToRead = this.state.allBooks.filter(book => book.shelf === 'wantToRead');
-    const read = this.state.allBooks.filter(book => book.shelf === 'read');
-
     return (
       <div className="app">
         {this.state.showSearchPage ? (
           <SearchPage
+            myBooks={this.state.myBooks}
             changeShelf={this.changeShelf}
             toMainPage={() => this.setState({showSearchPage: false})}
           />
         ) : (
           <MainPage
-            currentlyReading={currentlyReading}
-            wantToRead={wantToRead}
-            read={read}
+            myBooks={this.state.myBooks}
             changeShelf={this.changeShelf}
             toSearchPage={() => this.setState({showSearchPage: true})}
           />

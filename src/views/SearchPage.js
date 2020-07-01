@@ -7,17 +7,26 @@ class SearchPage extends React.Component {
     searchResults: []
   }
 
+  getCurrentShelf = (book) => {
+    const idx = this.props.myBooks.findIndex(b => b.id === book.id);
+    return idx === -1? 'none': this.props.myBooks[idx].shelf;
+  }
+
   searchHandler = (e) => {
     e.preventDefault();
     const searchTerm = e.target.elements.query.value.trim().toLowerCase();
-    search(searchTerm).then((books) => {
-      console.log({searchResults: books});
-      this.setState({searchResults: books});
-    })
+    search(searchTerm)
+      .then((books) => {
+        books.forEach(b => {b.shelf = this.getCurrentShelf(b)});
+        this.setState({searchResults: books});
+      })
+      .catch(() => {
+        this.setState({searchResults: []});
+      })
   }
 
   render() {
-    const {changeShelf, toMainPage} = this.props;
+    const { _, changeShelf, toMainPage } = this.props;
 
     return (
       <div className="search-books">
