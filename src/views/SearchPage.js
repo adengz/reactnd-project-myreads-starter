@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { search } from '../BooksAPI';
 import Book from '../components/Book';
 
@@ -26,12 +27,12 @@ class SearchPage extends React.Component {
   }
 
   render() {
-    const { _, changeShelf, toMainPage } = this.props;
+    const { changeShelf } = this.props;
 
     return (
       <div className="search-books">
         <div className="search-books-bar">
-          <button className="close-search" onClick={toMainPage}>Close</button>
+          <Link className="close-search" to="/">Close</Link>
           <div className="search-books-input-wrapper">
             <form onSubmit={this.searchHandler}>
               <input type="text" name="query" placeholder="Search by title or author"/>
